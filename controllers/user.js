@@ -95,6 +95,8 @@ const loginUser = asyncHandler(async (req, res) => {
   const token = generateToken(user._id);
 
   // Send HTTP-only cookie
+  // note: the cookie is send as res 
+  // but in the auth.js it is received as req
   res.cookie("token", token, {
     path: "/",
     httpOnly: true,
@@ -161,13 +163,15 @@ const loginStatus = asyncHandler(async (req, res) => {
   // Verify Token
   const verified = jwt.verify(token, process.env.JWT_SECRET);
   if (verified) {
-    return res.json(true);
+    return res.json({loggedIn: true});
   }
   return res.json(false);
 });
 
 // Update User
 const updateUser = asyncHandler(async (req, res) => {
+     // set user to req.user from auth.js
+    //  req.user = user;
   const user = await User.findById(req.user._id);
 
   if (user) {
@@ -220,7 +224,7 @@ const changePassword = asyncHandler(async (req, res) => {
     throw new Error("Old password is incorrect");
   }
 });
-// forgot password
+//docs: forgot password
 const forgotPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
