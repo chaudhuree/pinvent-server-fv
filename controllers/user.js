@@ -7,12 +7,12 @@ const crypto = require("crypto");
 const sendEmail = require("../utils/sendEmail");
 
 
-// Generate Token
+//fn: Generate Token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
-// Register User
+//docs: Register User
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -70,7 +70,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-// Login User
+//docs: Login User
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -122,7 +122,7 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-// Logout User
+//docs: Logout User
 const logout = asyncHandler(async (req, res) => {
   res.cookie("token", "", {
     path: "/",
@@ -154,7 +154,7 @@ const getUser = asyncHandler(async (req, res) => {
   }
 });
 
-// Get Login Status
+//docs: Get Login Status
 const loginStatus = asyncHandler(async (req, res) => {
   const token = req.cookies.token;
   if (!token) {
@@ -168,7 +168,7 @@ const loginStatus = asyncHandler(async (req, res) => {
   return res.json(false);
 });
 
-// Update User
+//docs: Update User
 const updateUser = asyncHandler(async (req, res) => {
      // set user to req.user from auth.js
     //  req.user = user;
@@ -261,7 +261,8 @@ const forgotPassword = asyncHandler(async (req, res) => {
     createdAt: Date.now(),
     expiresAt: Date.now() + 30 * (60 * 1000), // Thirty minutes
   }).save();
-
+const tokenData=await Token.find({}).populate("userId");
+console.log("tokenData",tokenData);
   // Construct Reset Url
   const resetUrl = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`;
 
