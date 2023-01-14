@@ -5,7 +5,7 @@ const productSchema = mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "user",
+      ref: "User",
     },
     name: {
       type: String,
@@ -38,13 +38,13 @@ const productSchema = mongoose.Schema(
       required: [true, "Please add a description"],
       trim: true,
     },
-    image: {
+    image: { // image is an  objects
       type: Object,
       default: {},
     },
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 

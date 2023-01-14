@@ -288,7 +288,7 @@ console.log("tokenData",tokenData);
   }
 });
 
-// Reset Password
+//docs: Reset Password
 const resetPassword = asyncHandler(async (req, res) => {
   const { password } = req.body;
   const { resetToken } = req.params;

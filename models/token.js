@@ -5,7 +5,6 @@ const tokenSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     // type: mongoose.Types.ObjectId,
     required: true,
-    // ref: "user",
     ref: "User", // This is the name of the model
   },
   token: {
