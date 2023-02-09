@@ -18,9 +18,11 @@ const contactUs = asyncHandler(async (req, res) => {
     }
 
     // nodemailer data to send email
-    const send_to = process.env.EMAIL_USER; //this email id well be changed accordingly
-    const sent_from = process.env.EMAIL_USER;
-    const reply_to = user.email;
+    const send_to = process.env.EMAIL_USER; //chaudhuree@gmail.com 
+    //this is the email id of the person who will receive the email(website owner)
+    //this email id well be changed accordingly
+    const sent_from = process.env.EMAIL_USER; //nodemailer email id this will not be changed
+    const reply_to = user.email; //user email id, who has logged in.
     try {
         await sendEmail(subject, message, send_to, sent_from, reply_to);
         res.status(200).json({ success: true, message: "Email Sent" });
