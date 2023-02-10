@@ -1,0 +1,7 @@
+router.get("/:id", protect, getProduct);
+router.delete("/:id", protect, deleteProduct);
+
+this two lines were creating problem. the solutin is redife this two route,
+
+router.get("/product/:id", protect, getProduct);
+router.delete("/deleteProduct/:id", protect, deleteProduct);

@@ -134,7 +134,7 @@ const logout = asyncHandler(async (req, res) => {
   return res.status(200).json({ message: "Successfully Logged Out" });
 });
 
-// Get User Data
+//docs:  Get User Data
 const getUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
@@ -158,7 +158,7 @@ const getUser = asyncHandler(async (req, res) => {
 const loginStatus = asyncHandler(async (req, res) => {
   const token = req.cookies.token;
   if (!token) {
-    return res.json(false);
+    return res.json({ loggedIn: false });
   }
   // Verify Token
   const verified = jwt.verify(token, process.env.JWT_SECRET);
